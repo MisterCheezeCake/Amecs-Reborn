@@ -1,0 +1,9 @@
+This is a Platform Language Folder, which contains language files,
+in this case with keyboard translations, which are dependent on the
+user's platform (Windows, Mac, Linux).
+
+Minecraft does not natively support loading these files, so the
+PlatformLanguageLoader mod is embedded and provides this function.
+
+For more information on PlatformLanguageLoader, see
+https://github.com/MisterCheezeCake/PlatformLanguageLoader

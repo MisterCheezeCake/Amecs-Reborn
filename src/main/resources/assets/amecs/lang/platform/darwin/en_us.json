@@ -1,0 +1,10 @@
+{
+  "amecs.modifier.alt": "Option",
+  "amecs.modifier.alt.short": "Opt",
+  "amecs.modifier.alt.tiny": "⌥",
+  "amecs.modifier.control.tiny": "^",
+  "amecs.modifier.shift.tiny": "⇧",
+  "amecs.modifier.super": "Command",
+  "amecs.modifier.super.short": "Cmd",
+  "amecs.modifier.super.tiny": "⌘"
+}

@@ -1,0 +1,4 @@
+{
+	"key.amecs-testmod.priority": "Priority Keybinding",
+	"key.amecs-testmod.priority.amecs.description": "A Keybinding that tests the priority execution using Amecs API.\nSupports line breaks."
+}

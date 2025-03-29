@@ -1,0 +1,47 @@
+{
+	"schemaVersion": 1,
+	"id": "amecs-reborn",
+	"version": "${version}",
+	"name": "Amecs Reborn",
+	"description": "Allows you to set modifier keys for keybinds, and provides some additional utilities",
+	"authors": [
+		"MisterCheezeCake",
+		"Siphalor",
+		"Klotzi111"
+	],
+	"contributors": [],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/amecs-reborn",
+		"issues": "https://github.com/MisterCheezeCake/Amecs-Reborn/issues"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/amecs/logo.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"de.siphalor.amecs.Amecs"
+		],
+		"modmenu": [
+			"de.siphalor.amecs.compat.ModMenu"
+		]
+	},
+	"accessWidener": "amecs.accesswidener",
+	"mixins": [
+		"amecs.mixins.json"
+	],
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/YH3hw926hz"
+			}
+		}
+	},
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"fabric-api": "*",
+		"minecraft": ">=1.21.4"
+	},
+	"conflicts": {
+		"nmuk": "<=1.0.999"
+	}
+}

@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "de.siphalor.amecs.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ControlsListWidgetKeyBindingEntryAccessor",
+    "MixinEntryListWidget",
+    "MixinGameOptions",
+    "MixinInputUtilType",
+    "MixinKeyBinding",
+    "MixinKeyBindingEntry",
+    "MixinKeybindsScreen",
+    "MixinKeyboard",
+    "MixinMinecraftClient",
+    "MixinMouse",
+    "compat.MixinControllingKeybindsScreen",
+    "compat.MixinControllingKeyEntry"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
+  "refmap": "amecs-reborn-refmap.json"
+}
