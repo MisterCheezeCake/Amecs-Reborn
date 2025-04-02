@@ -43,7 +43,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(NewKeyBindsScreen.class)
 public abstract class MixinControllingKeybindsScreen extends KeybindsScreen {
 
-
     @Shadow public abstract ControlsListWidget getKeyBindsList();
 
     public MixinControllingKeybindsScreen(Screen parent, GameOptions gameOptions) {

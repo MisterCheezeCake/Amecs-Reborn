@@ -73,7 +73,11 @@ public class SearchFieldControlsListWidget extends ControlsListWidget.Entry {
 			}
 
 			searchText = searchText.trim();
+
+			//? if >=1.21.4 {
 			listWidget.setScrollY(0);
+			//?} else
+			/*listWidget.setScrollAmount(0);*/
 
 			List<ControlsListWidget.Entry> children = listWidget.children();
 			if (entries.isEmpty()) {

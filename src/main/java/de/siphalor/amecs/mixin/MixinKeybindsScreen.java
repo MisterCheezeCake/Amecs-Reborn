@@ -61,7 +61,16 @@ public abstract class MixinKeybindsScreen extends GameOptionsScreen {
 		super(screen, gameOptions, text);
 	}
 
-	@Inject(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V"))
+	@Inject(
+			method = "mouseClicked",
+			at = @At(
+					value = "INVOKE",
+					//? if >1.21.1 {
+					target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V"
+					//?} else
+					/*target = "Lnet/minecraft/client/option/GameOptions;setKeyCode(Lnet/minecraft/client/option/KeyBinding;Lnet/minecraft/client/util/InputUtil$Key;)V"*/
+			)
+	)
 	public void onClicked(double x, double y, int type, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
 		InputUtil.Key key = ((IKeyBinding) selectedKeyBinding).amecs$getBoundKey();
 		KeyModifiers keyModifiers = ((IKeyBinding) selectedKeyBinding).amecs$getKeyModifiers();
@@ -71,12 +80,33 @@ public abstract class MixinKeybindsScreen extends GameOptionsScreen {
 
 	}
 
-	@Inject(method = "keyPressed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V", ordinal = 0))
+	@Inject(
+			method = "keyPressed",
+			at = @At(
+					value = "INVOKE",
+					//? if >1.21.1 {
+					target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V",
+					//?} else
+					/*target = "Lnet/minecraft/client/option/GameOptions;setKeyCode(Lnet/minecraft/client/option/KeyBinding;Lnet/minecraft/client/util/InputUtil$Key;)V",*/
+					ordinal = 0
+			)
+	)
 	public void clearKeyBinding(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
 		((IKeyBinding) selectedKeyBinding).amecs$getKeyModifiers().unset();
 	}
 
-	@Inject(method = "keyPressed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V", ordinal = 1), cancellable = true)
+	@Inject(
+			method = "keyPressed",
+			at = @At(
+					value = "INVOKE",
+					//? if >1.21.1 {
+					target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V",
+					//?} else
+					/*target = "Lnet/minecraft/client/option/GameOptions;setKeyCode(Lnet/minecraft/client/option/KeyBinding;Lnet/minecraft/client/util/InputUtil$Key;)V",*/
+					ordinal = 1
+			),
+			cancellable = true
+	)
 	public void onKeyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
 		if (selectedKeyBinding.isUnbound()) {
 			selectedKeyBinding.setBoundKey(InputUtil.fromKeyCode(keyCode, scanCode));
@@ -100,7 +130,13 @@ public abstract class MixinKeybindsScreen extends GameOptionsScreen {
 		callbackInfoReturnable.setReturnValue(true);
 	}
 
-	@Inject(method = "method_60342", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V"))
+	@Inject(
+			method = "method_60342",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/option/KeyBinding;setBoundKey(Lnet/minecraft/client/util/InputUtil$Key;)V"
+			)
+	)
 	public void onSetToDefault(ButtonWidget btn, CallbackInfo ci, @Local KeyBinding keyBinding) {
 		if (keyBinding instanceof AmecsKeyBinding) {
 			((AmecsKeyBinding) keyBinding).resetKeyBinding();

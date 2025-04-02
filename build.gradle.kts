@@ -39,7 +39,7 @@ base {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/amecs.accesswidener")
+    accessWidenerPath = rootProject.file("src/main/resources/amecs.accesswidener")
 }
 
 
@@ -60,9 +60,11 @@ dependencies {
 
 tasks.processResources {
     inputs.property("version", project.version)
+    inputs.property("support_range", project.property("support_range") as String)
 
     filesMatching("fabric.mod.json") {
-        expand("version" to project.version)
+        expand(mapOf("version" to project.version, "support_range" to project.property("support_range") as String))
+
     }
 }
 
