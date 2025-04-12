@@ -142,6 +142,9 @@ public class MetaOptions {
                 .styled(it -> it.withColor(Formatting.RED));
         private final Screen parent;
 
+        private static final int BUTTON_WIDTH = 200;
+        private static final int BUTTON_HEIGHT = 20;
+
         public MetaOptionsScreen(Screen parent) {
             super(Text.translatable("amecs.meta.options.title"));
             this.parent = parent;
@@ -171,34 +174,34 @@ public class MetaOptions {
         @Override
         protected void init() {
             super.init();
-            int centerX = this.width / 2;
+            int buttonX = (this.width / 2) - 100;
             this.addDrawableChild(ButtonWidget.builder(buttonTextFor("searchBar"), button -> {
                 OptionsSerializable opts = get();
                 opts.searchBar = !opts.searchBar;
                 button.setMessage(buttonTextFor("searchBar"));
-            }).dimensions(centerX - 100, 30, 200, 20).build());
+            }).dimensions(buttonX, 30, BUTTON_WIDTH, BUTTON_HEIGHT).build());
 
             this.addDrawableChild(ButtonWidget.builder(buttonTextFor("skinKeybinds"), button -> {
                 OptionsSerializable opts = get();
                 opts.skinKeybinds = !opts.skinKeybinds;
                 button.setMessage(buttonTextFor("skinKeybinds"));
-            }).dimensions(centerX - 100, 80, 200, 20).build());
+            }).dimensions(buttonX, 80, BUTTON_WIDTH, BUTTON_HEIGHT).build());
 
             this.addDrawableChild(ButtonWidget.builder(buttonTextFor("autoJumpKeybind"), button -> {
                 OptionsSerializable opts = get();
                 opts.autoJumpKeybind = !opts.autoJumpKeybind;
                 button.setMessage(buttonTextFor("autoJumpKeybind"));
-            }).dimensions(centerX - 100, 110, 200, 20).build());
+            }).dimensions(buttonX, 110, BUTTON_WIDTH, BUTTON_HEIGHT).build());
 
             this.addDrawableChild(ButtonWidget.builder(buttonTextFor("escapeKeybind"), button -> {
                 OptionsSerializable opts = get();
                 opts.escapeKeybind = !opts.escapeKeybind;
                 button.setMessage(buttonTextFor("escapeKeybind"));
-            }).dimensions(centerX - 100, 140, 200, 20).build());
+            }).dimensions(buttonX, 140, BUTTON_WIDTH, BUTTON_HEIGHT).build());
 
             this.addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE, button -> {
                 this.close();
-            }).dimensions(centerX - 100, this.height - 30, 200, 20).build());
+            }).dimensions(buttonX, this.height - 30, 200, 20).build());
 
 
         }

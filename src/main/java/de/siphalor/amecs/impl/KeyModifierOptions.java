@@ -38,6 +38,10 @@ import java.util.List;
 @ApiStatus.Internal
 public class KeyModifierOptions {
 	private static final String KEY_MODIFIERS_PREFIX = "key_modifiers_";
+	/**
+	 * Called amecsapi options for legacy compat reasons
+	 * TODO: Migrate this, change name at least. JSON format? Use the SMKB one?
+	 */
 	private static final File optionsFile = new File(MinecraftClient.getInstance().runDirectory, "options." + "amecsapi" + ".txt");
 
 	private KeyModifierOptions() {}
@@ -55,7 +59,7 @@ public class KeyModifierOptions {
 				try {
 					Files.delete(optionsFile.toPath());
 				} catch (IOException e) {
-					Amecs.LOGGER.error("Failed to cleanup Amecs API key binding modifier file - weird.", e);
+					Amecs.LOGGER.error("Failed to cleanup Amecs modifier file - weird.", e);
 				}
 			}
 			return;
@@ -68,7 +72,7 @@ public class KeyModifierOptions {
 				writer.println(KEY_MODIFIERS_PREFIX + binding.getTranslationKey() + ":" + modifiers.serializeValue());
 			}
 		} catch (FileNotFoundException e) {
-			Amecs.LOGGER.error("Failed to save Amecs API modifiers to options file", e);
+			Amecs.LOGGER.error("Failed to save Amecs modifiers to options file", e);
 		}
 	}
 
@@ -82,7 +86,7 @@ public class KeyModifierOptions {
 				readLine(line);
 			}
 		} catch (IOException e) {
-			Amecs.LOGGER.error("Failed to load Amecs API options file", e);
+			Amecs.LOGGER.error("Failed to load Amecs modifier options file", e);
 		}
 	}
 
@@ -90,31 +94,31 @@ public class KeyModifierOptions {
 		try {
 			int colon = line.indexOf(':');
 			if (colon <= 0) {
-				Amecs.LOGGER.warn("Invalid line in Amecs API options file: {}", line);
+				Amecs.LOGGER.warn("Invalid line in Amecs modifier options file: {}", line);
 				return;
 			}
 			String id = line.substring(0, colon);
 			if (!id.startsWith(KEY_MODIFIERS_PREFIX)) {
-				Amecs.LOGGER.warn("Invalid entry in Amecs API options file: {}", id);
+				Amecs.LOGGER.warn("Invalid entry in Amecs modifier options file: {}", id);
 				return;
 			}
 			id = id.substring(KEY_MODIFIERS_PREFIX.length());
 			KeyBinding keyBinding = KeyBindingUtils.getIdToKeyBindingMap().get(id);
 			if (keyBinding == null) {
-				Amecs.LOGGER.warn("Unknown keybinding identifier in Amecs API options file: {}", id);
+				Amecs.LOGGER.warn("Unknown keybinding identifier in Amecs modifier options file: {}", id);
 				return;
 			}
 
 			KeyModifiers modifiers = new KeyModifiers(KeyModifiers.deserializeValue(line.substring(colon + 1)));
 			if (keyBinding.isUnbound()) {
 				if (!modifiers.isUnset()) {
-					Amecs.LOGGER.warn("Found modifiers for unbound keybinding in Amecs API options file. Ignoring them: {}", id);
+					Amecs.LOGGER.warn("Found modifiers for unbound keybinding in Amecs modifier options file. Ignoring them: {}", id);
 				}
 				return;
 			}
 			((IKeyBinding) keyBinding).amecs$getKeyModifiers().copyModifiers(modifiers);
 		} catch (Throwable e) {
-			Amecs.LOGGER.error("Invalid line in Amecs API options file: {}", line, e);
+			Amecs.LOGGER.error("Invalid line in Amecs modifier options file: {}", line, e);
 		}
 	}
 }

@@ -34,6 +34,8 @@ import java.util.Arrays;
 @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 @Environment(EnvType.CLIENT)
 public class KeyModifiers {
+
+	private static final String TOSTRING_TEMPLATE = "KeyModifiers [alt=%b, control=%b, shift=%b, super=%b]";
 	/**
 	 * This field is for comparison ONLY.
 	 * <p>
@@ -95,7 +97,9 @@ public class KeyModifiers {
 	 * @param alt     sets whether the alt flag should be set
 	 * @param control sets whether the control flag should be set
 	 * @param shift   sets whether the shift flag should be set
+	 * @deprecated    Please use the constructor which supports super keys instead.
 	 */
+	@Deprecated(since = "2.1.0")
 	public KeyModifiers(boolean alt, boolean control, boolean shift) {
 		this();
 		setAlt(alt);
@@ -313,7 +317,7 @@ public class KeyModifiers {
 
 	@Override
 	public String toString() {
-		return "KeyModifiers [alt=" + getAlt() + ", control=" + getControl() + ", shift=" + getShift() + "]";
+		return TOSTRING_TEMPLATE.formatted(getAlt(), getControl(), getShift(), getSuper());
 	}
 
 	// new format even if it needs more characters because it is more user friendly (and simpler to parse). Not everyone knows about bit masks
