@@ -20,5 +20,5 @@
     "defaultRequire": 1
   },
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
-  "refmap": "amecs-reborn-refmap.json"
+  "refmap": "Amecs-Reborn-refmap.json"
 }
