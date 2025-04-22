@@ -43,5 +43,8 @@
 	},
 	"conflicts": {
 		"nmuk": "<=1.0.999"
-	}
+	},
+	"provides": [
+		"amecsapi"
+	]
 }
