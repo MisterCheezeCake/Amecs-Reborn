@@ -53,6 +53,13 @@ public abstract class MixinControllingKeybindsScreen extends KeybindsScreen {
     public void onKeyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
        assert this.selectedKeyBinding != null;
         if (selectedKeyBinding.isUnbound()) {
+            if (keyCode == 256) {
+                this.selectedKeyBinding = null;
+                this.lastKeyCodeUpdateTime = Util.getMeasuringTimeMs();
+                this.getKeyBindsList().update();
+                cir.setReturnValue(true);
+                return;
+            }
             selectedKeyBinding.setBoundKey(InputUtil.fromKeyCode(keyCode, scanCode));
         } else {
             InputUtil.Key mainKey = ((IKeyBinding) selectedKeyBinding).amecs$getBoundKey();
